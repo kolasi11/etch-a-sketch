@@ -1,26 +1,36 @@
 .container {
     display: flex;
+    flex-wrap: nowrap;
     margin: 10px auto;
-    width: 960px;
-    height: 960px;
+    width: 640px;
+    height: 640px;
     border: 1px black solid;
 }
 
-.button {
+.row {
     display: flex;
-    background-color: blue;
-    color: white;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+
+.head {
+    display: flex;
+    margin: 5px 30%;
+}
+
+.button {
+    flex: 1;
+    background-color: rgb(240, 239, 239);
+    color: black;
     font-family: Arial;
-    font-size: 18px;
-    padding: 15px 32px;
-    border: none;
+    font-size: 15px;
+    padding: 5px 10px;
+    border: 1px black solid;
     border-radius: 5px;
-    margin: 10px auto;
+    margin: 5px 10px;
     cursor: pointer;
 }
 .container div {
     background: rgb(255, 255, 255);
-    height: 60px;
-    width: 60px;
     flex: auto;
 }
