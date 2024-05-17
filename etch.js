@@ -6,7 +6,7 @@ function grid() {
     for (let i = 0; i < 16; i++) {
         grids[i] = [];
         grids[i] = document.createElement('div');
-        grids[i].classList.add('row')
+        grids[i].classList.add('row');
         for (let j = 0; j < 16; j++) {
             grids[i][j] = document.createElement('div');
             const gridId = 'g_' + i + '_' + j;
@@ -18,8 +18,13 @@ function grid() {
     }
 }
 
+function getGrids() {
+    const grids = document.getElementsByClassName('grid');
+    return grids;
+}
+
 function hover_effect() {
-const grids = document.getElementsByClassName("grid");
+    grids = getGrids();
     for (let ids of grids) {
         ids.addEventListener(
         'mouseover',
@@ -30,5 +35,18 @@ const grids = document.getElementsByClassName("grid");
     }
 }
 
+function reset() {
+    resetButton = document.getElementById('reset');
+    resetButton.addEventListener('click', resetColor);
+}
+
+function resetColor() {
+    grids = getGrids();
+    for (let grid of grids) {
+        grid.style.backgroundColor = 'white';
+    }
+}
+
 grid();
 hover_effect();
+reset();
