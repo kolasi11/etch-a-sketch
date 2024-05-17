@@ -1,13 +1,13 @@
-function grid() {
+function grid(count) {
     const conatiner = document.querySelector(".container");
-    let i = 1;
     const grids = [];
+    conatiner.innerHTML = ' ';
 
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < count; i++) {
         grids[i] = [];
         grids[i] = document.createElement('div');
         grids[i].classList.add('row');
-        for (let j = 0; j < 16; j++) {
+        for (let j = 0; j < count; j++) {
             grids[i][j] = document.createElement('div');
             const gridId = 'g_' + i + '_' + j;
             grids[i][j].setAttribute('id', gridId);
@@ -15,6 +15,7 @@ function grid() {
             grids[i].appendChild(grids[i][j]);
         }
         conatiner.appendChild(grids[i]);
+        hoverEffect();
     }
 }
 
@@ -23,8 +24,8 @@ function getGrids() {
     return grids;
 }
 
-function hover_effect() {
-    grids = getGrids();
+function hoverEffect() {
+    grids = document.getElementsByClassName('grid');
     for (let ids of grids) {
         ids.addEventListener(
         'mouseover',
@@ -47,6 +48,23 @@ function resetColor() {
     }
 }
 
-grid();
-hover_effect();
+function changeSize() {
+    sizeBtn = document.getElementById('changeSize');
+    sizeBtn.addEventListener('click', askSize);
+}
+
+function askSize() {
+    let count = parseInt(prompt("Enter number of grid (1-100):"));
+    console.log(count);
+    if (count < 1 || count > 100 || isNaN(count)) {
+        askSize();
+    }
+    else {
+        console.log("clicked ", + count);
+        grid(count);
+    }
+}
+
+grid(16);
 reset();
+changeSize();
