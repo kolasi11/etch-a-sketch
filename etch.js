@@ -15,7 +15,7 @@ function grid(count) {
             grids[i].appendChild(grids[i][j]);
         }
         conatiner.appendChild(grids[i]);
-        hoverEffect();
+        hoverEffect('defaultHover');
     }
 }
 
@@ -24,16 +24,13 @@ function getGrids() {
     return grids;
 }
 
-function hoverEffect() {
-    grids = document.getElementsByClassName('grid');
-    for (let ids of grids) {
-        ids.addEventListener(
-        'mouseover',
-        (event) => {
-            event.target.style.backgroundColor = 'black';
-        }
-        );
+function hoverEffect(hover) {
+    if(hover == 'defaultHover') {
+        hoverDefault();
     }
+    const black = document.getElementById('default').addEventListener('click', hoverDefault);
+    const random = document.getElementById('changeColor').addEventListener('click', hoverRGB);
+    
 }
 
 function reset() {
@@ -55,13 +52,36 @@ function changeSize() {
 
 function askSize() {
     let count = parseInt(prompt("Enter number of grid (1-100):"));
-    console.log(count);
     if (count < 1 || count > 100 || isNaN(count)) {
         askSize();
     }
     else {
-        console.log("clicked ", + count);
         grid(count);
+    }
+}
+
+function hoverRGB() {
+    resetColor();
+    grids = getGrids();
+    for (let id of grids) {
+        id.addEventListener(
+            'mouseover',
+            (event) => {
+                event.target.style.backgroundColor = 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
+            }
+        );
+    }
+}
+
+function hoverDefault() {
+    grids = getGrids();
+    for (let id of grids) {
+        id.addEventListener(
+            'mouseover',
+            (event) => {
+                event.target.style.backgroundColor = 'black';
+            }
+        );
     }
 }
 
